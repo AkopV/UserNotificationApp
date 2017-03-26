@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int SECOND_ACTIVITY_RESULT_CODE = 0;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     UserData userData;
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, DetailUserActivity.class));
+                Intent intent = new Intent(view.getContext(), DetailUserActivity.class);
+                startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
             }
         });
     }

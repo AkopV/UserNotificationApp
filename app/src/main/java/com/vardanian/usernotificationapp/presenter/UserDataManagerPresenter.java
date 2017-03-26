@@ -50,7 +50,6 @@ public class UserDataManagerPresenter implements MVPUserDataManager.UserDataPres
     private void updateUIWithResults(UserData userData) {
         if (UserDataManagerPresenter.this.view != null) {
             UserDataManagerPresenter.this.view.onUserDataReceived(userData);
-//            view.setName();
         }
     }
 

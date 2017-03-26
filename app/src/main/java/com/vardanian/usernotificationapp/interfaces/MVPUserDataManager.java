@@ -1,5 +1,7 @@
 package com.vardanian.usernotificationapp.interfaces;
 
+import android.content.Intent;
+
 import com.vardanian.usernotificationapp.model.User;
 import com.vardanian.usernotificationapp.model.UserData;
 import com.vardanian.usernotificationapp.model.UserName;
@@ -14,9 +16,6 @@ public interface MVPUserDataManager {
     interface UserDataView {
         void onUserDataReceived(UserData userData);
         void onError(String error);
-//        void setName(UserName userName);
-//        void setPicture(UserPicture userPicture);
-//        void setUser(User user);
     }
 
     interface UserDataPresenter {
@@ -26,5 +25,19 @@ public interface MVPUserDataManager {
 
     interface UserDataModel {
         Observable<UserData> fetchUsers();
+    }
+
+    interface UserView {
+        void onUserReceived(User username);
+        void onError(String error);
+    }
+
+    interface UserPresenter {
+        void setView(UserView view);
+        void loadData(Intent intent);
+    }
+
+    interface UserModel {
+        Observable<User> fetchUser();
     }
 }

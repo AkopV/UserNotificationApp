@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserLocation {
+public class UserLocation implements Parcelable {
 
     @SerializedName("street")
     @Expose
@@ -20,6 +20,25 @@ public class UserLocation {
     @SerializedName("postCode")
     @Expose
     private int postCode;
+
+    protected UserLocation(Parcel in) {
+        street = in.readString();
+        city = in.readString();
+        state = in.readString();
+        postCode = in.readInt();
+    }
+
+    public static final Creator<UserLocation> CREATOR = new Creator<UserLocation>() {
+        @Override
+        public UserLocation createFromParcel(Parcel in) {
+            return new UserLocation(in);
+        }
+
+        @Override
+        public UserLocation[] newArray(int size) {
+            return new UserLocation[size];
+        }
+    };
 
     public String getStreet() {
         return street;
@@ -51,5 +70,18 @@ public class UserLocation {
 
     public void setPostCode(int postCode) {
         this.postCode = postCode;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(street);
+        dest.writeString(city);
+        dest.writeString(state);
+        dest.writeInt(postCode);
     }
 }

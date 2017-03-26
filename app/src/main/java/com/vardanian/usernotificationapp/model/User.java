@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class User implements Parcelable {
     @SerializedName("gender")
     @Expose
     private String gender;
@@ -67,4 +67,41 @@ public class User {
     public String toString() {
         return getName().getFirst() + " " + getName().getLast();
     }
+
+    public User() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.gender);
+        dest.writeParcelable(this.name, flags);
+        dest.writeParcelable(this.location, flags);
+        dest.writeString(this.email);
+        dest.writeParcelable(this.picture, flags);
+    }
+
+    protected User(Parcel in) {
+        this.gender = in.readString();
+        this.name = in.readParcelable(UserName.class.getClassLoader());
+        this.location = in.readParcelable(UserLocation.class.getClassLoader());
+        this.email = in.readString();
+        this.picture = in.readParcelable(UserPicture.class.getClassLoader());
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

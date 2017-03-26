@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserPicture {
+public class UserPicture implements Parcelable {
 
     @SerializedName("large")
     @Expose
@@ -17,6 +17,24 @@ public class UserPicture {
     @SerializedName("thumbnail")
     @Expose
     private String thumbnail;
+
+    protected UserPicture(Parcel in) {
+        large = in.readString();
+        medium = in.readString();
+        thumbnail = in.readString();
+    }
+
+    public static final Creator<UserPicture> CREATOR = new Creator<UserPicture>() {
+        @Override
+        public UserPicture createFromParcel(Parcel in) {
+            return new UserPicture(in);
+        }
+
+        @Override
+        public UserPicture[] newArray(int size) {
+            return new UserPicture[size];
+        }
+    };
 
     public String getLarge() {
         return large;
@@ -40,5 +58,17 @@ public class UserPicture {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(large);
+        dest.writeString(medium);
+        dest.writeString(thumbnail);
     }
 }
