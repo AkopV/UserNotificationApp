@@ -1,6 +1,8 @@
 package com.vardanian.usernotificationapp.view.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -8,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vardanian.usernotificationapp.R;
 import com.vardanian.usernotificationapp.model.User;
 import com.vardanian.usernotificationapp.model.UserData;
 import com.vardanian.usernotificationapp.utils.RoundedTransformation;
+import com.vardanian.usernotificationapp.view.DetailUserActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     @Override
     public UserAdapter.UserHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.fragment_detail_user, viewGroup, false);
+        View view = inflater.inflate(R.layout.user_item, viewGroup, false);
         return new UserHolder(view);
     }
 
@@ -53,14 +57,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     class UserHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_user_photo)
-        ImageView ivUserPhoto;
-        @BindView(R.id.et_user_first_name)
-        EditText etUserFirstName;
-        @BindView(R.id.et_user_last_name)
-        EditText etUserLastName;
-        @BindView(R.id.et_user_email)
-        EditText etUserEmail;
+        @BindView(R.id.iv_user)
+        ImageView ivUser;
+        @BindView(R.id.tv_username)
+        TextView tvUserName;
         private User user;
         private Context context;
 
@@ -78,11 +78,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                         .load(user.getPicture().getLarge())
                         .placeholder(R.drawable.ic_user_48x48)
                         .transform(new RoundedTransformation(100, 4))
-                        .into(ivUserPhoto);
-
-            etUserFirstName.setText(user.getName().getFirst());
-            etUserLastName.setText(user.getName().getLast());
-            etUserEmail.setText(user.getEmail());
+                        .into(ivUser);
+            tvUserName.setText(user.getName().getFirst() + " " + user.getName().getLast());
         }
     }
 }

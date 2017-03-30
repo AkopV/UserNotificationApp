@@ -46,15 +46,17 @@ public class DetailUserActivity extends AppCompatActivity {
                     .commit();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-//                intent.putExtra(User.class.getName(), user);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), MainActivity.class);
+////                intent.putExtra(User.class.getName(), user);
+//                intent.putExtra("ActivityResult", activityResult);
+//                setResult(RESULT_OK, intent);
+//                finish();
+//            }
+//        });
     }
 
 }

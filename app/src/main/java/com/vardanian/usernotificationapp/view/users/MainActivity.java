@@ -1,6 +1,7 @@
 package com.vardanian.usernotificationapp.view.users;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.vardanian.usernotificationapp.R;
+import com.vardanian.usernotificationapp.model.User;
 import com.vardanian.usernotificationapp.model.UserData;
 import com.vardanian.usernotificationapp.view.DetailUserActivity;
 import com.vardanian.usernotificationapp.view.DetailUserActivityFragment;
@@ -23,18 +26,21 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int SECOND_ACTIVITY_RESULT_CODE = 0;
+    public static final String EXTRA_USER = "com.vardanian.usernotificationapp.view.MainActivity.EXTRA_USER";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    UserData userData;
+
+//    public static Intent getStartIntent(Context context, User user) {
+//            Intent intent = new Intent(context, MainActivity.class);
+//        intent.putExtra(EXTRA_USER, user);
+//        return intent;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        userData = new UserData();
 
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -48,16 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment, fragment)
                     .commit();
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailUserActivity.class);
-                startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
-            }
-        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

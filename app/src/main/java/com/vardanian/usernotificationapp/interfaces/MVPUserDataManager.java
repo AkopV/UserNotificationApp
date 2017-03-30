@@ -28,7 +28,7 @@ public interface MVPUserDataManager {
     }
 
     interface UserView {
-        void onUserReceived(User username);
+        void onUserReceived(UserData userData);
         void onError(String error);
     }
 

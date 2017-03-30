@@ -1,10 +1,12 @@
 package com.vardanian.usernotificationapp.presenter;
 
 import android.content.Intent;
+import android.os.Parcelable;
 
 import com.vardanian.usernotificationapp.data.network.RetrofitUserRepository;
 import com.vardanian.usernotificationapp.interfaces.MVPUserDataManager;
 import com.vardanian.usernotificationapp.model.User;
+import com.vardanian.usernotificationapp.model.UserData;
 
 public class UserManagerPresenter implements MVPUserDataManager.UserPresenter {
 
@@ -26,8 +28,9 @@ public class UserManagerPresenter implements MVPUserDataManager.UserPresenter {
         if (intent == null) {
             UserManagerPresenter.this.view.onError("Can not load data");
         } else {
-            User user = intent.getParcelableExtra(User.class.getName());
-            UserManagerPresenter.this.view.onUserReceived(user);
+            UserData userData = intent.getParcelableExtra(UserData.class.getName());
+            intent.putExtra(UserData.class.getName(), userData);
+            UserManagerPresenter.this.view.onUserReceived(userData);
         }
     }
 }

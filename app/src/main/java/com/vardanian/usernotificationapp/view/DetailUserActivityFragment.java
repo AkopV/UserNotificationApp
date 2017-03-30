@@ -1,5 +1,8 @@
 package com.vardanian.usernotificationapp.view;
 
+import android.content.Intent;
+import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,12 +20,16 @@ import com.vardanian.usernotificationapp.model.User;
 import com.vardanian.usernotificationapp.model.UserData;
 import com.vardanian.usernotificationapp.presenter.UserDataManagerPresenter;
 import com.vardanian.usernotificationapp.utils.RoundedTransformation;
+import com.vardanian.usernotificationapp.view.users.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailUserActivityFragment extends Fragment implements MVPUserDataManager.UserDataView{
+import static android.app.Activity.RESULT_OK;
 
+public class DetailUserActivityFragment extends Fragment implements MVPUserDataManager.UserDataView {
+
+    public static final String EXTRA_USER = "com.vardanian.usernotificationapp.view.MainActivity.EXTRA_USER";
     @BindView(R.id.iv_user_photo)
     ImageView ivUserPhoto;
     @BindView(R.id.et_user_first_name)
@@ -31,8 +38,12 @@ public class DetailUserActivityFragment extends Fragment implements MVPUserDataM
     EditText etUserLastName;
     @BindView(R.id.et_user_email)
     EditText etUserEmail;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     private UserData userData;
     public MVPUserDataManager.UserDataPresenter presenter;
+
+    String activityResult;
 
     public DetailUserActivityFragment() {
     }
@@ -60,9 +71,9 @@ public class DetailUserActivityFragment extends Fragment implements MVPUserDataM
         userData = new UserData();
     }
 
-    public void updateUI(UserData userData) {
+    public void updateUI(final UserData userData) {
         this.userData = userData;
-         User user = this.userData.getResults().get(0);
+         final User user = this.userData.getResults().get(0);
         if (!TextUtils.isEmpty(user.getPicture().getLarge()))
             Picasso.with(getContext())
                     .load(user.getPicture().getLarge())
@@ -73,6 +84,20 @@ public class DetailUserActivityFragment extends Fragment implements MVPUserDataM
         etUserFirstName.setText(user.getName().getFirst());
         etUserLastName.setText(user.getName().getLast());
         etUserEmail.setText(user.getEmail());
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                intent.putExtra(UserData.class.getName(), userData);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
