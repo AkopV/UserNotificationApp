@@ -6,7 +6,7 @@ Get a random from a free, open-source API (https://randomuser.me/). Like Lorem I
 
 # Result Example
 
-The application will provide you with a JSON, XML, CSV, or YAML object that you can parse and apply to your application.
+The application will provide you with a JSON that you can parse and apply to your application.
 
 You can specify the format you want the results in using the format parameter.
 
@@ -68,3 +68,8 @@ Libraries used in this project
 * [Gson]
 * [RecyclerVew]
 * [Picasso]
+
+
+Developed By
+------------
+* Akop Vardanian
