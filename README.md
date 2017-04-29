@@ -2,7 +2,7 @@
 
 Get a random user from a free, open-source API (https://randomuser.me/). Like Lorem Ipsum, but for people.
 
-![screenshot at 01 17-35-23](https://cloud.githubusercontent.com/assets/16304318/24579637/be73a6e4-1701-11e7-8ccb-792b4476e110.png)
+![photo_screen_user](https://cloud.githubusercontent.com/assets/16304318/25559010/47e034e8-2d3b-11e7-9eda-fe7a6fbd53dd.png)
 
 # Result Example
 
